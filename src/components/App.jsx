@@ -1,7 +1,10 @@
 import { BlogCard } from "./BlogCard/BlogCard";
+import { Statistics } from "./Statistics/Statistics";
+import { ForbesList } from "./ForbesList/ForbesList";
 import article from "../data/article.json"
 import data from "../data/data.json"
-import { Statistics } from "./Statistics/Statistics";
+import forbes from "../data/forbes.json"
+
 export const App = () => {
   return (
     <div
@@ -16,7 +19,9 @@ export const App = () => {
     >
       React homework template
       <BlogCard {...article} />
-      <Statistics title="Main Statistics" stats ={data}  />
+      <Statistics title="Main Statistics" stats={data} />
+      <ForbesList list={forbes} />
+
     </div>
   );
 };
