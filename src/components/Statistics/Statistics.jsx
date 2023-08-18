@@ -1,21 +1,35 @@
 import PropTypes from 'prop-types';
-import { StatisticsItem } from "components/StatisticsItem/StatisticsItem";
-
-
+import { FaRegThumbsUp } from 'react-icons/fa';
+import { MdPeople, MdOutlineProductionQuantityLimits } from 'react-icons/md';
+import { GiTreeDoor } from 'react-icons/gi';
+import { StatisticsItem } from 'components/StatisticsItem/StatisticsItem';
+import { List, Title } from './Statistic.styled';
+const iconsArr = [
+  <FaRegThumbsUp />,
+  <MdPeople />,
+  <MdOutlineProductionQuantityLimits />,
+  <GiTreeDoor />,
+];
 export const Statistics = ({ title, stats }) => {
   return (
     <>
-      {title && <h2>{title}</h2>}
-      <ul>
-        {stats.map(({id, title, total}) => (
-            <StatisticsItem key={id} title={ title} total ={total} />
+      {title && <Title>{title}</Title>}
+      <List>
+        {stats.map(({ id, title, total }, index) => (
+          <StatisticsItem
+            key={id}
+            title={title}
+            total={total}
+            icon={iconsArr[index]}
+          />
         ))}
-      </ul>
+      </List>
     </>
   );
 };
 
 Statistics.propTypes = {
   title: PropTypes.string,
-  stats: PropTypes.arrayOf(PropTypes.shape({id: PropTypes.string.isRequired})).isRequired
+  stats: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired }))
+    .isRequired,
 };
