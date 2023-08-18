@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
 
-export const StatisticsItem = ({ title, total }) => {
+import { ListItem, Paragraph, Title } from './StatisticItem.styled';
+import { IconContext } from 'react-icons';
+
+export const StatisticsItem = ({ title, total, icon }) => {
   return (
-    <li>
-      <h2>{title}</h2>
-      <p>{total}</p>
-    </li>
+    <ListItem>
+      <IconContext.Provider value={{ color: 'green', size: '30px' }}>
+        {icon}
+      </IconContext.Provider>
+      <Title>{total}</Title>
+      <Paragraph>{title}</Paragraph>
+    </ListItem>
   );
 };
 
