@@ -1,29 +1,38 @@
 import { ForbesListItem } from 'components/ForbesListItem/ForbesListItem';
 import PropTypes from 'prop-types';
+import {
+  LeaderBoard,
+  BoardHeader,
+  BoardTitle,
+  TitleTop,
+  TitleBottom,
+  LeaderBoardProfiles,
+} from './ForbesList.styled';
 
 export const ForbesList = ({ list }) => {
   return (
-    <div>
-      <div>
-        <div>
-          <h2>Forbes</h2>
-          <h3>Leader board</h3>
-        </div>
-      </div>
+    <LeaderBoard>
+      <BoardHeader>
+        <BoardTitle>
+          <TitleTop>Forbes</TitleTop>
+          <TitleBottom>Leader board</TitleBottom>
+        </BoardTitle>
+      </BoardHeader>
 
-      <ul>
-        {list.map(({ id, name, capital, avatar }) => {
+      <LeaderBoardProfiles>
+        {list.map(({ id, name, capital, avatar, isIncrease }) => {
           return (
             <ForbesListItem
               key={id}
               name={name}
               capital={capital}
               avatar={avatar}
+              isIncrease={isIncrease}
             />
           );
         })}
-      </ul>
-    </div>
+      </LeaderBoardProfiles>
+    </LeaderBoard>
   );
 };
 
