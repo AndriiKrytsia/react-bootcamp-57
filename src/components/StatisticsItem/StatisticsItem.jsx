@@ -19,3 +19,4 @@ StatisticsItem.propTypes = {
   title: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
 };
+
