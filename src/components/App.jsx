@@ -1,27 +1,22 @@
-import { BlogCard } from "./BlogCard/BlogCard";
-import { Statistics } from "./Statistics/Statistics";
-import { ForbesList } from "./ForbesList/ForbesList";
-import article from "../data/article.json"
-import data from "../data/data.json"
-import forbes from "../data/forbes.json"
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { Points } from 'tabs/Points';
+import { Props } from 'tabs/Props';
 
 export const App = () => {
   return (
-    <div
-      // style={{
-      //   height: '100vh',
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   fontSize: 40,
-      //   color: '#010101'
-      // }}
-    >
-      React homework template
-      <BlogCard {...article} />
-      <Statistics title="Main Statistics" stats={data} />
-      <ForbesList list={forbes} />
+    <Tabs>
+      <TabList>
+        <Tab>Props</Tab>
+        <Tab>Points</Tab>
+      </TabList>
 
-    </div>
+      <TabPanel>
+        <Props />
+      </TabPanel>
+      <TabPanel>
+        <Points />
+      </TabPanel>
+    </Tabs>
   );
 };
