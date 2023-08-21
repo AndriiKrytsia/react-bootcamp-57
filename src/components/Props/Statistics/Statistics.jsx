@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { MdPeople, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { GiTreeDoor } from 'react-icons/gi';
-import { StatisticsItem } from 'components/StatisticsItem/StatisticsItem';
+import { StatisticsItem } from 'components/Props/StatisticsItem/StatisticsItem';
 import { List, Title } from './Statistic.styled';
 const iconsArr = [
   <FaRegThumbsUp />,
