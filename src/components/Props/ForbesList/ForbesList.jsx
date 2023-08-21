@@ -1,4 +1,4 @@
-import { ForbesListItem } from 'components/ForbesListItem/ForbesListItem';
+import { ForbesListItem } from 'components/Props/ForbesListItem/ForbesListItem';
 import PropTypes from 'prop-types';
 import {
   LeaderBoard,

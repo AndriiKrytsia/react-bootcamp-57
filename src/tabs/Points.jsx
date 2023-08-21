@@ -1,3 +1,6 @@
+import { PointsOptions } from 'components/Points/PointsOptions';
+import { Statistics } from 'components/Points/Statistics';
+import { Section } from 'components/Section/Section';
 import { Component } from 'react';
 export class Points extends Component {
   state = {
@@ -8,32 +11,34 @@ export class Points extends Component {
     five: 0,
   };
 
-  leavePoints = option => {
-    console.log(option);
+  leavePoints = (option, value) => {
     this.setState(prevState => ({
-      [option]: prevState[option] + 1,
+      [option]: prevState[option] + value,
     }));
   };
 
+  totalPoints = () => {
+    return Object.values(this.state).reduce((acc, option) => acc + option, 0);
+  };
+
   render() {
+    const total = this.totalPoints();
     return (
       <>
-        <h2>Leave point</h2>
-        <ul>
-          {Object.keys(this.state).map(option => (
-            <li key={option}>
-              <button onClick={() => this.leavePoints(option)}>{option}</button>
-            </li>
-          ))}
-        </ul>
-        <h2>Total points</h2>
-        <ul>
-          {Object.entries(this.state).map(([key, value]) => (
-            <li key={key}>
-              {key}: {value}
-            </li>
-          ))}
-        </ul>
+        <Section title="Leave point">
+          <PointsOptions
+            options={Object.keys(this.state)}
+            onLeavePoint={this.leavePoints}
+          />
+        </Section>
+
+        <Section title="Total points">
+          {total > 0 ? (
+            <Statistics total={total} options={Object.entries(this.state)} />
+          ) : (
+            <p>Not Points</p>
+          )}
+        </Section>
       </>
     );
   }
