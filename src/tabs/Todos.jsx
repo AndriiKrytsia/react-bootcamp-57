@@ -1,4 +1,6 @@
-import { nanoid } from 'nanoid';
+import { Filter } from 'components/Todos/Filter';
+import { Form } from 'components/Todos/Form';
+import { TodoList } from 'components/Todos/TodoList';
 
 import { Component } from 'react';
 
@@ -8,50 +10,47 @@ export class Todos extends Component {
       { id: 1, text: 'todo 1' },
       { id: 2, text: 'todo 2' },
     ],
-    text: '',
+    filter: '',
   };
-  hendleChange = event => {
-    this.setState({ text: event.target.value });
-  };
-  hendleSubmit = event => {
-    event.preventDefault();
-    const todo = { id: nanoid(), text: this.state.text };
+
+  hendleSubmit = todo => {
+    const isExist = this.state.todos.find(
+      el => el.text.toLocaleLowerCase() === todo.text.toLocaleLowerCase()
+    );
+    if (isExist) {
+      alert('Todo already exist');
+      return;
+    }
     this.setState(prevState => ({ todos: [...prevState.todos, todo] }));
-    this.setState({ text: '' });
   };
+
   hendleDeleteTodo = idTodo => {
     this.setState(prevState => ({
       todos: prevState.todos.filter(({ id }) => id !== idTodo),
     }));
-    console.log(idTodo);
+  };
+
+  hendleFilerTodo = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  getFilteretTodos = () => {
+    const { filter, todos } = this.state;
+    const normalazeFilter = filter.toLocaleLowerCase();
+    return todos.filter(({ text }) =>
+      text.toLocaleLowerCase().includes(normalazeFilter)
+    );
   };
   render() {
-    const { todos } = this.state;
+    const filteredTodos = this.getFilteretTodos();
     return (
       <div>
         Todos
-        <form onSubmit={this.hendleSubmit}>
-          <input
-            value={this.state.text}
-            type="text"
-            onChange={this.hendleChange}
-          />
-          <button type="submit">Add Todo</button>
-        </form>
-        <ul>
-          {todos.map(({ id, text }) => (
-            <li key={id}>
-              {text}
-              <button
-                onClick={() => {
-                  this.hendleDeleteTodo(id);
-                }}
-              >
-                delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Form onSubmit={this.hendleSubmit} />
+        filter your todo
+        <Filter filterTodo={this.hendleFilerTodo} />
+        <TodoList todos={filteredTodos} deleteTodo={this.hendleDeleteTodo} />
       </div>
     );
   }
