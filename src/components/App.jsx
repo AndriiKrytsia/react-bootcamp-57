@@ -1,19 +1,21 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { Points } from 'tabs/Points';
-import { Props } from 'tabs/Props';
-import { Counter } from 'tabs/Counter';
 
+import { Points, Props, Counter, Todos } from 'tabs';
 
 export const App = () => {
   return (
     <Tabs>
       <TabList>
+        <Tab>Todos</Tab>
         <Tab>Props</Tab>
         <Tab>Points</Tab>
         <Tab>Counter</Tab>
       </TabList>
 
+      <TabPanel>
+        <Todos />
+      </TabPanel>
       <TabPanel>
         <Props />
       </TabPanel>
