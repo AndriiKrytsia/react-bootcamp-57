@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-bootcamp-57/static/css/main.decfb1f2.css",
-    "main.js": "/react-bootcamp-57/static/js/main.509ca4b3.js",
+    "main.js": "/react-bootcamp-57/static/js/main.854917a3.js",
     "index.html": "/react-bootcamp-57/index.html",
     "main.decfb1f2.css.map": "/react-bootcamp-57/static/css/main.decfb1f2.css.map",
-    "main.509ca4b3.js.map": "/react-bootcamp-57/static/js/main.509ca4b3.js.map"
+    "main.854917a3.js.map": "/react-bootcamp-57/static/js/main.854917a3.js.map"
   },
   "entrypoints": [
     "static/css/main.decfb1f2.css",
-    "static/js/main.509ca4b3.js"
+    "static/js/main.854917a3.js"
   ]
 }
