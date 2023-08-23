@@ -1,8 +1,10 @@
+import { Component } from 'react';
 import { Filter } from 'components/Todos/Filter';
 import { Form } from 'components/Todos/Form';
 import { TodoList } from 'components/Todos/TodoList';
+import storage from '../helpers/storage';
 
-import { Component } from 'react';
+const LOCALSTORAGE_KEY = 'todos';
 
 export class Todos extends Component {
   state = {
@@ -13,6 +15,18 @@ export class Todos extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const todos = storage.load(LOCALSTORAGE_KEY);
+    if (todos) {
+      this.setState({ todos });
+    }
+  }
+  componentDidUpdate(_, prevState) {
+    const { todos } = this.state;
+    if (prevState.todos !== todos) {
+      storage.save(LOCALSTORAGE_KEY, todos);
+    }
+  }
   hendleSubmit = todo => {
     const isExist = this.state.todos.find(
       el => el.text.toLocaleLowerCase() === todo.text.toLocaleLowerCase()
