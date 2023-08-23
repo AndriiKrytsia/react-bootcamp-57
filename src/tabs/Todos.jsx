@@ -1,6 +1,7 @@
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { Filter } from 'components/Todos/Filter';
-import { Form } from 'components/Todos/Form';
+import { Form } from 'components/Form';
 import { TodoList } from 'components/Todos/TodoList';
 import storage from '../helpers/storage';
 
@@ -27,14 +28,15 @@ export class Todos extends Component {
       storage.save(LOCALSTORAGE_KEY, todos);
     }
   }
-  hendleSubmit = todo => {
+  hendleSubmit = text => {
     const isExist = this.state.todos.find(
-      el => el.text.toLocaleLowerCase() === todo.text.toLocaleLowerCase()
+      el => el.text.toLocaleLowerCase() === text.toLocaleLowerCase()
     );
     if (isExist) {
       alert('Todo already exist');
       return;
     }
+    const todo = { id: nanoid(), text };
     this.setState(prevState => ({ todos: [...prevState.todos, todo] }));
   };
 
@@ -61,7 +63,7 @@ export class Todos extends Component {
     return (
       <div>
         Todos
-        <Form onSubmit={this.hendleSubmit} />
+        <Form onSubmit={this.hendleSubmit} nameButton='Add Todo' />
         filter your todo
         <Filter filterTodo={this.hendleFilerTodo} />
         <TodoList todos={filteredTodos} deleteTodo={this.hendleDeleteTodo} />
