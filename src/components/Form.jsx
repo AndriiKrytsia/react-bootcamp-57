@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+
 
 export class Form extends Component {
   state = {
@@ -17,8 +17,8 @@ export class Form extends Component {
       alert('Add Todo');
       return;
     }
-    const todo = { id: nanoid(), text };
-    this.props.onSubmit(todo);
+    
+    this.props.onSubmit(text);
     this.setState({ text: '' });
   };
 
@@ -31,7 +31,7 @@ export class Form extends Component {
           type="text"
           onChange={this.hendleChange}
         />
-        <button type="submit">Add Todo</button>
+        <button type="submit">{this.props.nameButton}</button>
       </form>
     );
   }
