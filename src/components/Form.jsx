@@ -1,38 +1,27 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
+export const Form = ({ onSubmit, nameButton }) => {
+  const [text, setText] = useState('');
 
-export class Form extends Component {
-  state = {
-    text: '',
+  const hendleChange = event => {
+    setText(event.target.value);
   };
 
-  hendleChange = event => {
-    this.setState({ text: event.target.value });
-  };
-
-  hendleSubmit = event => {
+  const hendleSubmit = event => {
     event.preventDefault();
-    const { text } = this.state;
     if (!text.trim()) {
       alert('Add Todo');
       return;
     }
-    
-    this.props.onSubmit(text);
-    this.setState({ text: '' });
+
+    onSubmit(text);
+    setText('');
   };
 
-  render() {
-    return (
-      <form onSubmit={this.hendleSubmit}>
-        <input
-          required
-          value={this.state.text}
-          type="text"
-          onChange={this.hendleChange}
-        />
-        <button type="submit">{this.props.nameButton}</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={hendleSubmit}>
+      <input required value={text} type="text" onChange={hendleChange} />
+      <button type="submit">{nameButton}</button>
+    </form>
+  );
+};
