@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Filter } from 'components/Todos/Filter';
 import { Form } from 'components/Form';
 import { TodoList } from 'components/Todos/TodoList';
-import storage from '../helpers/storage';
 
 const LOCALSTORAGE_KEY = 'todos';
 
