@@ -3,71 +3,66 @@ import { Form } from 'components/Form';
 import { GalleryList } from 'components/Gallery/GalleryList';
 import { Loader } from 'components/Loader/Loader';
 import { Modal } from 'components/Modal/Modal';
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { getImages } from 'service/galleryService';
 
-export class Gallery extends Component {
-  state = {
-    query: '',
-    photos: [],
-    page: 1,
-    isEmpty: false,
-    showBtn: false,
-    isError: '',
-    src: '',
-    alt: '',
-    isLoading: false,
+export const Gallery = () => {
+  const [query, setQuery] = useState('');
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showBtn, setShowBtn] = useState(false);
+  const [isError, setIsError] = useState('');
+  const [src, setSrc] = useState('');
+  const [alt, setAlt] = useState('');
+
+  useEffect(() => {
+    setIsLoading(true);
+    getImages(query, page)
+      .then(({ photos, total_results }) => {
+        if (!total_results) {
+          setIsEmpty(true);
+          return;
+        }
+        setPhotos(prevState => [...prevState, ...photos]);
+        setShowBtn(page < Math.ceil(total_results / 15));
+      })
+      .catch(error => {
+        setIsError(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [page, query]);
+
+  const handleSubmit = query => {
+    setQuery(query);
+    setPhotos([]);
+    setPage(1);
+    setIsEmpty(false);
+    setIsError('');
+    setShowBtn(false);
   };
 
-  componentDidUpdate(_, prevState) {
-    const { query, page } = this.state;
-    if (query !== prevState.query || page !== prevState.page) {
-      this.setState({ isLoading: true });
-      getImages(query, page)
-        .then(({ photos, total_results }) => {
-          if (!total_results) {
-            this.setState({ isEmpty: true });
-            return;
-          }
-          this.setState(prevState => ({
-            photos: [...prevState.photos, ...photos],
-            showBtn: page < Math.ceil(total_results / 15),
-          }));
-        })
-        .catch(error => {
-          this.setState({ isError: error.message });
-        })
-        .finally(() => {
-          this.setState({ isLoading: false });
-        });
-    }
-  }
-
-  handleSubmit = query => {
-    this.setState({ query, photos: [], page: 1, isEmpty: false, isError: '' });
+  const loadMore = () => {
+    setPage(prevState => prevState + 1);
   };
 
-  loadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+  const handleOpenModal = ({ src, alt }) => {
+    setSrc(src);
+    setAlt(alt);
   };
 
-  handleOpenModal = ({ src, alt }) => {
-    this.setState({ src, alt });
-  };
-
-  render() {
-    const { photos, isEmpty, showBtn, isError, src, alt, isLoading } =
-      this.state;
-    return (
-      <>
-        <Form onSubmit={this.handleSubmit} nameButton="Search" />
-        <GalleryList photos={photos} openModal={this.handleOpenModal} />
-        {showBtn && <Button handleClick={this.loadMore} text="Load more" />}
-        {isEmpty && <p>Sorry we nothing find😭</p>}
-        {isError && <p>{isError}😭</p>}
-        {src && <Modal closeModal={this.handleOpenModal} src={src} alt={alt} />}
-        {isLoading && <Loader />}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Form onSubmit={handleSubmit} nameButton="Search" />
+      <GalleryList photos={photos} openModal={handleOpenModal} />
+      {showBtn && <Button handleClick={loadMore} text="Load more" />}
+      {isEmpty && <p>Sorry we nothing find😭</p>}
+      {isError && <p>{isError}😭</p>}
+      {src && <Modal closeModal={handleOpenModal} src={src} alt={alt} />}
+      {isLoading && <Loader />}
+    </>
+  );
+};
