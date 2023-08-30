@@ -18,6 +18,9 @@ export const Gallery = () => {
   const [alt, setAlt] = useState('');
 
   useEffect(() => {
+    if (!query) {
+      return;
+    }
     setIsLoading(true);
     getImages(query, page)
       .then(({ photos, total_results }) => {
