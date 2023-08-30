@@ -1,3 +1,14 @@
+import { CocktailsList } from 'components/Cocktails/CocktailsList';
+import { useEffect, useState } from 'react';
+import { getTrendingCocktails } from 'service/cocktailsService';
+
 export const Cocktails = () => {
-  return <h2>Cocktails</h2>;
+  const [cocktails, setCocktails] = useState([]);
+
+  useEffect(() => {
+    getTrendingCocktails().then(setCocktails);
+  }, []);
+  console.log(cocktails);
+
+  return <CocktailsList cocktails={cocktails} />;
 };
