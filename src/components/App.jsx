@@ -1,15 +1,21 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import {
-  Points,
-  Props,
-  Counter,
-  Todos,
-  Gallery,
-  Home,
-  CocktailDetails,
-} from 'pages';
+import { lazy } from 'react';
+
 import { Header } from './Header/Header';
-import { Cocktails } from 'pages/Cocktails';
+
+const eazyLazy = path => {
+  return lazy(() => import(`pages/${path}`));
+};
+
+const Home = eazyLazy('Home');
+const Cocktails = eazyLazy('Cocktails');
+const CocktailsSearch = lazy(() => import('pages/CocktailsSearch'));
+const CocktailDetails = lazy(() => import('pages/CocktailDetails'));
+const Gallery = lazy(() => import('pages/Gallery'));
+const Todos = lazy(() => import('pages/Todos'));
+const Points = lazy(() => import('pages/Points'));
+const Counter = lazy(() => import('pages/Counter'));
+const Props = lazy(() => import('pages/Props'));
 
 export const App = () => {
   return (
@@ -17,6 +23,7 @@ export const App = () => {
       <Route path="/" element={<Header />}>
         <Route index element={<Home />} />
         <Route path="cocktails" element={<Cocktails />} />
+        <Route path="cocktails-search" element={<CocktailsSearch />} />
         <Route path="cocktails/:cocktailId" element={<CocktailDetails />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="todos" element={<Todos />} />

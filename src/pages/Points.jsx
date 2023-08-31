@@ -3,7 +3,7 @@ import { Statistics } from 'components/Points/Statistics';
 import { Section } from 'components/Section/Section';
 import { useState } from 'react';
 
-export const Points = () => {
+const Points = () => {
   const [points, setPoints] = useState({
     one: 0,
     two: 0,
@@ -43,3 +43,5 @@ export const Points = () => {
     </>
   );
 };
+
+export default Points;
