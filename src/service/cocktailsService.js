@@ -16,3 +16,8 @@ export const getTrendingCocktails = () => {
     })
   );
 };
+
+export const getCocktailDetails = async id => {
+  const { data } = await instance.get(`/lookup.php?i=${id}`);
+  return data.drinks[0];
+};

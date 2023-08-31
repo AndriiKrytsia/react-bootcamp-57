@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   Points,
   Props,
@@ -24,6 +24,7 @@ export const App = () => {
         <Route path="points" element={<Points />} />
         <Route path="counter" element={<Counter />} />
       </Route>
+      <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );
 };
