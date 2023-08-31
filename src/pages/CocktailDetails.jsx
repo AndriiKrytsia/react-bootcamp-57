@@ -3,7 +3,8 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { getCocktailDetails } from 'service/cocktailsService';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
-export const CocktailDetails = () => {
+
+const CocktailDetails = () => {
   const [cocktail, setCocktail] = useState(null);
   const { cocktailId } = useParams();
   const location = useLocation();
@@ -29,3 +30,5 @@ export const CocktailDetails = () => {
     </div>
   );
 };
+
+export default CocktailDetails;

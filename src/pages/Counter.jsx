@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export class Counter extends Component {
+class Counter extends Component {
   state = {
     value: 0,
   };
@@ -16,12 +16,12 @@ export class Counter extends Component {
   //     }));
   //   };
 
-    updateValue = value => {
-        console.log(value)
-        this.setState(prevState => ({
-            value: prevState.value + value,
-        }))
-    };
+  updateValue = value => {
+    console.log(value);
+    this.setState(prevState => ({
+      value: prevState.value + value,
+    }));
+  };
   render() {
     return (
       <div>
@@ -32,3 +32,5 @@ export class Counter extends Component {
     );
   }
 }
+
+export default Counter;

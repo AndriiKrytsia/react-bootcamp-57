@@ -34,7 +34,7 @@ const useLocalStorage = (key, defaultValue) => {
   return [value, setValue];
 };
 
-export const Todos = () => {
+const Todos = () => {
   const [todos, setTodos] = useLocalStorage(LOCALSTORAGE_KEY, initialState);
 
   const [filter, setFilter] = useState('');
@@ -78,3 +78,5 @@ export const Todos = () => {
     </div>
   );
 };
+
+export default Todos;

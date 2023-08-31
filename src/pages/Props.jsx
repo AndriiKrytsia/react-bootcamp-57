@@ -5,7 +5,7 @@ import article from 'data/article.json';
 import data from 'data/data.json';
 import forbes from 'data/forbes.json';
 
-export const Props = () => {
+const Props = () => {
   return (
     <>
       <BlogCard {...article} />
@@ -14,3 +14,5 @@ export const Props = () => {
     </>
   );
 };
+
+export default Props;

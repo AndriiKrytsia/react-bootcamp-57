@@ -6,7 +6,7 @@ import { Modal } from 'components/Modal/Modal';
 import { useEffect, useState } from 'react';
 import { getImages } from 'service/galleryService';
 
-export const Gallery = () => {
+const Gallery = () => {
   const [query, setQuery] = useState('');
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
@@ -69,3 +69,5 @@ export const Gallery = () => {
     </>
   );
 };
+
+export default Gallery;
