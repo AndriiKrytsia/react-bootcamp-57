@@ -1,17 +1,13 @@
-
 import { Filter } from 'components/Todos/Filter';
 import { Form } from 'components/Form';
 import { TodoList } from 'components/Todos/TodoList';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from 'redux/actions';
 import { selectFilter, selectTodos } from 'redux/selectors';
-
+import { addTodo } from 'redux/todoSlice';
 
 const Todos = () => {
- 
-const todos = useSelector(selectTodos)
-const dispatch = useDispatch(selectFilter)
-
+  const todos = useSelector(selectTodos);
+  const dispatch = useDispatch(selectFilter);
 
   const hendleSubmit = text => {
     const isExist = todos.find(
@@ -29,8 +25,8 @@ const dispatch = useDispatch(selectFilter)
       Todos
       <Form onSubmit={hendleSubmit} nameButton="Add Todo" />
       filter your todo
-      <Filter/>
-      <TodoList/>
+      <Filter />
+      <TodoList />
     </div>
   );
 };
