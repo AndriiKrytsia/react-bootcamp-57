@@ -3,12 +3,18 @@ import { Form } from 'components/Form';
 import { TodoList } from 'components/Todos/TodoList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, selectTodos } from 'redux/selectors';
-import { addTodo } from 'redux/todoSlice';
+import { addTodo } from 'redux/operations';
+import { useEffect } from 'react';
+import { fetchTodos } from 'redux/operations';
 
 const Todos = () => {
   const todos = useSelector(selectTodos);
   const dispatch = useDispatch(selectFilter);
 
+  useEffect(() => {
+    dispatch(fetchTodos())
+  }, [dispatch]);  
+  
   const hendleSubmit = text => {
     const isExist = todos.find(
       el => el.text.toLocaleLowerCase() === text.toLocaleLowerCase()
