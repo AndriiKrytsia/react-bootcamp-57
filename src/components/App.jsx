@@ -1,7 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 
 import { Header } from './Header/Header';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/auth/operations';
 
 const eazyLazy = path => {
   return lazy(() => import(`pages/${path}`));
@@ -20,6 +22,12 @@ const Login = lazy(() => import('pages/Login'));
 const Register = lazy(() => import('pages/Register'));
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<Header />}>
