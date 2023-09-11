@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, selectTodos } from 'redux/selectors';
-import { deleteTodo } from 'redux/operations';
+import { deleteTodo } from 'redux/todos/operations';
+import { selectFilter, selectTodos } from 'redux/todos/selectors';
 
 export const TodoList = () => {
   const todos = useSelector(selectTodos);
@@ -18,11 +18,16 @@ export const TodoList = () => {
   const filteredTodos = getFilteretTodos();
 
   return (
-    <ul style={{display:"flex",flexWrap:"wrap",gap:8}}>
+    <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
       {filteredTodos.map(({ id, text }) => (
-        <li key={id} style={{width:150}}>
+        <li key={id} style={{ width: 150 }}>
           <p>{text}</p>
-          <button style={{background:"red"}} onClick={() => dispatch(deleteTodo(id))}>delete</button>
+          <button
+            style={{ background: 'red' }}
+            onClick={() => dispatch(deleteTodo(id))}
+          >
+            delete
+          </button>
         </li>
       ))}
     </ul>

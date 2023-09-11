@@ -16,6 +16,8 @@ const Todos = lazy(() => import('pages/Todos'));
 const Points = lazy(() => import('pages/Points'));
 const Counter = lazy(() => import('pages/Counter'));
 const Props = lazy(() => import('pages/Props'));
+const Login = lazy(() => import('pages/Login'));
+const Register = lazy(() => import('pages/Register'));
 
 export const App = () => {
   return (
@@ -30,6 +32,8 @@ export const App = () => {
         <Route path="props" element={<Props />} />
         <Route path="points" element={<Points />} />
         <Route path="counter" element={<Counter />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
       </Route>
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
