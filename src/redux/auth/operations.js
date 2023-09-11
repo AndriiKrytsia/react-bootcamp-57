@@ -9,7 +9,7 @@ const setAuthHeader = token => {
   instance.defaults.headers.common.Authorization = 'Bearer ' + token;
 };
 
-const cleareAuthHeader = token => {
+const clearAuthHeader = token => {
   instance.defaults.headers.common.Authorization = '';
 };
 
@@ -31,6 +31,33 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     const { data } = await instance.post('/users/login', user);
     setAuthHeader(data.token);
     return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const { auth } = thunkAPI.getState();
+    if (!auth.token) {
+      return thunkAPI.rejectWithValue('NO user');
+    }
+    setAuthHeader(auth.token);
+    try {
+      const { data } = await instance.get('/users/me');
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await instance.post('/users/logout');
+    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
