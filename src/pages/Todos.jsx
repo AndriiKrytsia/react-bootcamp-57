@@ -26,7 +26,7 @@ const Todos = () => {
   };
 
   return (
-    <div>
+    <div style={{ border: '3px solid red' }}>
       Todos
       <Form onSubmit={hendleSubmit} nameButton="Add Todo" />
       filter your todo

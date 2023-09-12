@@ -12,16 +12,16 @@ import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter basename="/react-bootcamp-57">
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <App />
-          </PersistGate>
-        </Provider>
-        <GlobalStyle />
-      </ThemeProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter basename="/react-bootcamp-57">
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+      <GlobalStyle />
+    </ThemeProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
